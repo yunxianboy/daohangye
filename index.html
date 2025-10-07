@@ -2,15 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <!-- 关键viewport设置，确保自适应设备 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>club  1314.uk</title>
-  <!-- 引入Tailwind CSS -->
+  <title>club-Nav 1314.uk</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入Font Awesome -->
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   
-  <!-- 配置Tailwind自定义颜色和响应式断点 -->
   <script>
     tailwind.config = {
       theme: {
@@ -105,54 +101,50 @@
   </style>
 </head>
 <body class="min-h-screen overflow-x-hidden bg-light relative flex items-center justify-center p-4">
-  <!-- 爱心背景容器 -->
   <div id="hearts-container" class="fixed inset-0 z-0 pointer-events-none"></div>
   
-  <!-- 中间方框 - 响应式尺寸调整 -->
-  <div class="w-full max-w-[600px] min-h-[800px] bg-white/90 backdrop-blur-sm rounded-xl shadow-xl z-10 flex flex-col items-center relative overflow-hidden">
-    <!-- 顶部圆形图片 - 响应式尺寸 -->
+  <div class="w-full max-w-[600px] min-h-[500px] bg-white/90 backdrop-blur-sm rounded-xl shadow-xl z-10 flex flex-col items-center relative overflow-hidden">
+    <!-- 顶部圆形图片：已替换为指定地址 -->
     <div class="mt-5 mb-4 relative animate-pulse">
       <img src="https://www.1314.uk/img/love.png" alt="个人头像" class="w-[280px] sm:w-[300px] h-auto max-w-[80vw] circle-img">
     </div>
     
-    <!-- 左侧导航 - 响应式位置调整 -->
+    <!-- 左侧导航 -->
     <div class="absolute left-[5%] top-[55px] sm:left-[50px] flex flex-col gap-5">
-      <div class="side-nav-item text-sm sm:text-base">首页</div>
-      <div class="side-nav-item text-sm sm:text-base">个人中心</div>
-      <div class="side-nav-item text-sm sm:text-base">我的相册</div>
-      <div class="side-nav-item text-sm sm:text-base">收藏夹</div>
+      <a href="index.html" class="side-nav-item text-sm sm:text-base">首页</a>
+      <a href="profile.html" class="side-nav-item text-sm sm:text-base">个人中心</a>
+      <a href="album.html" class="side-nav-item text-sm sm:text-base">我的相册</a>
+      <a href="favorites.html" class="side-nav-item text-sm sm:text-base">收藏夹</a>
     </div>
     
-    <!-- 右侧导航 - 响应式位置调整 -->
+    <!-- 右侧导航 -->
     <div class="absolute right-[5%] top-[55px] sm:right-[50px] flex flex-col gap-5">
-      <div class="side-nav-item text-sm sm:text-base">系统设置</div>
-      <div class="side-nav-item text-sm sm:text-base">消息通知</div>
-      <div class="side-nav-item text-sm sm:text-base">邮件往来</div>
-      <div class="side-nav-item text-sm sm:text-base">分享链接</div>
+      <a href="settings.html" class="side-nav-item text-sm sm:text-base">系统设置</a>
+      <a href="notifications.html" class="side-nav-item text-sm sm:text-base">消息通知</a>
+      <a href="emails.html" class="side-nav-item text-sm sm:text-base">邮件往来</a>
+      <a href="share.html" class="side-nav-item text-sm sm:text-base">分享链接</a>
     </div>
     
-    <!-- 下方导航 - 响应式换行 -->
+    <!-- 下方导航 -->
     <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-1 mb-auto px-4">
-      <div class="nav-item text-sm sm:text-base">博物馆</div>
-      <div class="nav-item text-sm sm:text-base">留言本</div>
-      <div class="nav-item text-sm sm:text-base">更新记录</div>
-      <div class="nav-item text-sm sm:text-base">关于我们</div>
+      <a href="museum.html" class="nav-item text-sm sm:text-base">博物馆</a>
+      <a href="guestbook.html" class="nav-item text-sm sm:text-base">留言本</a>
+      <a href="updates.html" class="nav-item text-sm sm:text-base">更新记录</a>
+      <a href="about.html" class="nav-item text-sm sm:text-base">关于我们</a>
     </div>
     
-    <!-- 底部信息 - 响应式文字大小 -->
+    <!-- 底部信息 -->
     <div class="text-center text-dark/60 text-xs sm:text-sm pb-6 px-4">
       <p>© 2023 版权所有</p>
-      <p class="mt-1">网站域名: 1314.UK</p>
-      <p class="mt-1">成立日期: 2025年5月20日</p>
-      <p class="mt-1">联系邮箱: 520@1314.UK</p>
+      <p class="mt-1">网站域名: 1314.uk</p>
+      <p class="mt-1">成立日期: 2025年05月20日</p>
+      <p class="mt-1">联系邮箱: 520@1314.uk</p>
     </div>
   </div>
 
   <script>
-    // 根据屏幕尺寸调整爱心数量
     function createHearts() {
       const container = document.getElementById('hearts-container');
-      // 小屏幕减少爱心数量，提高性能
       const isSmallScreen = window.innerWidth < 640;
       const heartCount = isSmallScreen ? 15 : 30;
       
@@ -160,19 +152,12 @@
         const heart = document.createElement('div');
         heart.classList.add('heart');
         
-        // 随机位置
         const left = Math.random() * 100;
         const top = Math.random() * 100;
-        
-        // 随机大小（小屏幕缩小爱心）
         const size = isSmallScreen ? 5 + Math.random() * 15 : 10 + Math.random() * 20;
-        
-        // 随机动画延迟和持续时间
         const delay = Math.random() * 5;
         const duration = 5 + Math.random() * 10;
-        
-        // 随机颜色
-        const hue = 340 + Math.random() * 20; // 粉色系色调
+        const hue = 340 + Math.random() * 20;
         const saturation = 70 + Math.random() * 30;
         const lightness = 70 + Math.random() * 10;
         const opacity = 0.3 + Math.random() * 0.5;
@@ -189,10 +174,8 @@
       }
     }
     
-    // 页面加载和窗口大小变化时都重新布局
     window.addEventListener('DOMContentLoaded', createHearts);
     window.addEventListener('resize', () => {
-      // 清空现有爱心并重新创建
       document.getElementById('hearts-container').innerHTML = '';
       createHearts();
     });
