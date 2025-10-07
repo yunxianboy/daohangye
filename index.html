@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <!-- 关键viewport设置，确保自适应设备 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>个人主页</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义颜色和响应式断点 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B8B',
+            secondary: '#FFD1DC',
+            accent: '#FF85A1',
+            light: '#FFF5F7',
+            dark: '#5A4B51'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: rgba(255, 107, 139, 0.6);
+        transform: rotate(45deg);
+        animation: float 8s infinite ease-in-out;
+      }
+      .heart:before, .heart:after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: inherit;
+        border-radius: 50%;
+      }
+      .heart:before {
+        top: -10px;
+        left: 0;
+      }
+      .heart:after {
+        top: 0;
+        left: -10px;
+      }
+      .circle-img {
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid rgba(255, 255, 255, 0.7);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: rotate(45deg) translateY(0) translateX(0);
+        opacity: 0.6;
+      }
+      50% {
+        transform: rotate(45deg) translateY(-20px) translateX(10px);
+        opacity: 0.8;
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+    
+    .nav-item {
+      @apply relative overflow-hidden px-4 py-2 text-dark hover:text-primary transition-all duration-300 cursor-pointer;
+    }
+    
+    .nav-item:after {
+      @apply absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 content-[''];
+    }
+    
+    .nav-item:hover:after {
+      @apply w-full;
+    }
+    
+    .side-nav-item {
+      @apply hover:text-primary transition-colors duration-300 cursor-pointer font-medium whitespace-nowrap;
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden bg-light relative flex items-center justify-center p-4">
+  <!-- 爱心背景容器 -->
+  <div id="hearts-container" class="fixed inset-0 z-0 pointer-events-none"></div>
+  
+  <!-- 中间方框 - 响应式尺寸调整 -->
+  <div class="w-full max-w-[600px] min-h-[800px] bg-white/90 backdrop-blur-sm rounded-xl shadow-xl z-10 flex flex-col items-center relative overflow-hidden">
+    <!-- 顶部圆形图片 - 响应式尺寸 -->
+    <div class="mt-5 mb-4 relative animate-pulse">
+      <img src="https://www.1314.uk/img/love.png" alt="个人头像" class="w-[280px] sm:w-[300px] h-auto max-w-[80vw] circle-img">
+    </div>
+    
+    <!-- 左侧导航 - 响应式位置调整 -->
+    <div class="absolute left-[5%] top-[55px] sm:left-[50px] flex flex-col gap-5">
+      <div class="side-nav-item text-sm sm:text-base">首页</div>
+      <div class="side-nav-item text-sm sm:text-base">个人中心</div>
+      <div class="side-nav-item text-sm sm:text-base">我的相册</div>
+      <div class="side-nav-item text-sm sm:text-base">收藏夹</div>
+    </div>
+    
+    <!-- 右侧导航 - 响应式位置调整 -->
+    <div class="absolute right-[5%] top-[55px] sm:right-[50px] flex flex-col gap-5">
+      <div class="side-nav-item text-sm sm:text-base">系统设置</div>
+      <div class="side-nav-item text-sm sm:text-base">消息通知</div>
+      <div class="side-nav-item text-sm sm:text-base">邮件往来</div>
+      <div class="side-nav-item text-sm sm:text-base">分享链接</div>
+    </div>
+    
+    <!-- 下方导航 - 响应式换行 -->
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-1 mb-auto px-4">
+      <div class="nav-item text-sm sm:text-base">博物馆</div>
+      <div class="nav-item text-sm sm:text-base">留言本</div>
+      <div class="nav-item text-sm sm:text-base">更新记录</div>
+      <div class="nav-item text-sm sm:text-base">关于我们</div>
+    </div>
+    
+    <!-- 底部信息 - 响应式文字大小 -->
+    <div class="text-center text-dark/60 text-xs sm:text-sm pb-6 px-4">
+      <p>© 2023 版权所有</p>
+      <p class="mt-1">网站域名: example.com</p>
+      <p class="mt-1">成立日期: 2023年1月1日</p>
+      <p class="mt-1">联系邮箱: contact@example.com</p>
+    </div>
+  </div>
+
+  <script>
+    // 根据屏幕尺寸调整爱心数量
+    function createHearts() {
+      const container = document.getElementById('hearts-container');
+      // 小屏幕减少爱心数量，提高性能
+      const isSmallScreen = window.innerWidth < 640;
+      const heartCount = isSmallScreen ? 15 : 30;
+      
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        
+        // 随机位置
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        
+        // 随机大小（小屏幕缩小爱心）
+        const size = isSmallScreen ? 5 + Math.random() * 15 : 10 + Math.random() * 20;
+        
+        // 随机动画延迟和持续时间
+        const delay = Math.random() * 5;
+        const duration = 5 + Math.random() * 10;
+        
+        // 随机颜色
+        const hue = 340 + Math.random() * 20; // 粉色系色调
+        const saturation = 70 + Math.random() * 30;
+        const lightness = 70 + Math.random() * 10;
+        const opacity = 0.3 + Math.random() * 0.5;
+        
+        heart.style.left = `${left}%`;
+        heart.style.top = `${top}%`;
+        heart.style.width = `${size}px`;
+        heart.style.height = `${size}px`;
+        heart.style.animationDelay = `${delay}s`;
+        heart.style.animationDuration = `${duration}s`;
+        heart.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%, ${opacity})`;
+        
+        container.appendChild(heart);
+      }
+    }
+    
+    // 页面加载和窗口大小变化时都重新布局
+    window.addEventListener('DOMContentLoaded', createHearts);
+    window.addEventListener('resize', () => {
+      // 清空现有爱心并重新创建
+      document.getElementById('hearts-container').innerHTML = '';
+      createHearts();
+    });
+  </script>
+</body>
+</html>
